@@ -1,36 +1,34 @@
-import _$ from 'jquery';
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { renderIntoDocument, Simulate } from 'react-addons-test-utils';
 import jsdom from 'jsdom';
-import chai, { expect } from 'chai';
-import chaiJquery from 'chai-jquery';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import jquery from 'jquery';
+import TestUtils from 'react-addons-test-utils';
+import ReactDOM from 'react-dom';
+import {expect} from 'chai';
+import React from 'react';
+import {Provider} from 'react-redux';
+import {createStore} from 'redux';
 import reducers from '../src/reducers';
 
+//set up testing enviroment to run like a browser in command line
 global.document = jsdom.jsdom('<!doctype html><html><body></body></html>');
 global.window = global.document.defaultView;
-global.navigator = global.window.navigator;
-const $ = _$(window);
+const $ = jquery(global.window);
 
-chaiJquery(chai, chai.util, $);
 
-function renderComponent(ComponentClass, props = {}, state = {}) {
-  const componentInstance =  renderIntoDocument(
-    <Provider store={createStore(reducers, state)}>
-      <ComponentClass {...props} />
-    </Provider>
-  );
+//build 'renderComponent' helper that should render a given react class
+function renderComponent(ComponentClass) {
+    const componentInstance = TestUtils.renderIntoDocument(
+        <Provider store={createStore(reducers)}>
+            <ComponentClass />
+        </Provider>
+    );
 
-  return $(ReactDOM.findDOMNode(componentInstance));
+    return $(ReactDOM.findDOMNode(componentInstance)); //produces HTML of element
 }
 
-$.fn.simulate = function(eventName, value) {
-  if (value) {
-    this.val(value);
-  }
-  Simulate[eventName](this[0]);
-};
 
-export {renderComponent, expect};
+//build help for simulating events
+
+
+//set up chai-jquery
+
+export {renderComponent, expect}

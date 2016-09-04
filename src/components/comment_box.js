@@ -28,7 +28,9 @@ class CommentBox extends React.Component {
                     onChange={ this.handleChange.bind(this) }
                     value={ this.state.comment }
                 />
-                <button action="submit">Submit</button>
+                <div>
+                    <button action="submit">Submit</button>
+                </div>
             </form>
         )
     }

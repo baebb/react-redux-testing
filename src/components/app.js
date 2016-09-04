@@ -7,6 +7,7 @@ export default class App extends Component {
     render() {
         return (
             <div>
+                <h3>Add a comment</h3>
                 <CommentBox />
                 <CommentList />
             </div>
