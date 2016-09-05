@@ -1,12 +1,12 @@
-import { renderComponent, expect } from '../test_helper';
+import {renderComponent, expect} from '../test_helper';
 import CommentList from '../../src/components/comment_list';
 
 describe('CommentList', () => {
-   let component;
+    let component;
 
     beforeEach(() => {
         component = renderComponent(CommentList, null,
-            { comments: ['big cat', 'another comment'] });
+            {comments: ['big cat', 'another comment']});
     });
 
     it('shows an li for each comment', () => {
